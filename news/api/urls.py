@@ -1,15 +1,14 @@
-from django.urls import path
-from api.views import AuthView, CreateUserView
-from api.views import CommentCreate, CommentDelete, LikeToggle, NewsDetail, NewsList
+from rest_framework.routers import DefaultRouter
+
+from api.views import AuthViewSet, CommentViewSet, NewsViewSet, UserViewSet
 
 app_name = 'api'
 
-urlpatterns = [
-    path('auth/', AuthView.as_view(), name='auth'),
-    path('users/', CreateUserView.as_view(), name='create_user'),
-    path('news/', NewsList.as_view(), name='news-list'),
-    path('news/<int:pk>/', NewsDetail.as_view(), name='news-detail'),
-    path('news/<int:pk>/comments/', CommentCreate.as_view(), name='comment-create'),
-    path('comments/<int:pk>/', CommentDelete.as_view(), name='comment-delete'),
-    path('news/<int:pk>/like/', LikeToggle.as_view(), name='like-toggle'),
-]
+router = DefaultRouter()
+router.register(r'auth', AuthViewSet, basename='auth')
+router.register(r'users', UserViewSet, basename='users')
+router.register(r'news', NewsViewSet, basename='news')
+router.register(r'news/(?P<news_pk>\d+)/comments',
+                CommentViewSet, basename='comment')
+
+urlpatterns = router.urls

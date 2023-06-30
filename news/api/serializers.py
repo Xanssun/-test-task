@@ -1,7 +1,5 @@
 from rest_framework import serializers
 from api.authentication import CustomAuthentication
-from rest_framework import serializers
-
 from users.models import CustomUser
 from posts.models import News, Comment
 
@@ -52,10 +50,17 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class NewsSerializer(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(slug_field='username', queryset=CustomUser.objects.all())
-    comments = CommentSerializer(many=True, read_only=True, source='comment_set')
+    author = serializers.SlugRelatedField(slug_field='username',
+                                          queryset=CustomUser.objects.all())
+    comments = CommentSerializer(many=True, read_only=True,
+                                 source='comment_set')
     likes_count = serializers.IntegerField(read_only=True)
+    comments_count = serializers.SerializerMethodField()
 
     class Meta:
         model = News
-        fields = ['id', 'date', 'title', 'text', 'author', 'likes_count', 'comments']
+        fields = ['id', 'date', 'title', 'text', 'author',
+                  'likes_count', 'comments', 'comments_count']
+
+    def get_comments_count(self, obj):
+        return obj.comment_set.count()
