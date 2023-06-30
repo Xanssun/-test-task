@@ -37,8 +37,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username', 'password', 'email']
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
-        return user
+        return CustomUser.objects.create_user(**validated_data)
 
 
 class CommentSerializer(serializers.ModelSerializer):

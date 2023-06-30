@@ -25,8 +25,7 @@ class CustomAuthentication(authentication.BaseAuthentication):
 
     def generate_token(self, user):
         refresh = RefreshToken.for_user(user)
-        token = {
+        return {
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
-        return token

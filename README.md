@@ -1,4 +1,5 @@
-# -test-task
+# Проект News
+![Github actions](https://github.com/Xanssun/test_task/actions/workflows/main.yml/badge.svg)
 
 - запуск прокета
 
