@@ -24,18 +24,22 @@
 - docker-compose exec web python manage.py createsuperuser
 - docker-compose exec web python manage.py collectstatic --no-input
 
-5. Зайдите на (http://localhost/admin/) и убедитесь, что все работает
+5. Зайдите на (http://127.0.0.1/admin/) и убедитесь, что все работает
 
-- http://127.0.0.1:8000/api/users/ - создание пользователей POST
+# Проект на сервере
+- login xans
+- password 12345
+
+- http://158.160.9.119/api/users/ - создание пользователей POST
 ```
 {
-    "username": "user_user",
+    "username": "user",
     "password": "ASD123ASD",
-    "role": "user"
+    "email": "user@ma.ru"
 }
 
 ```
-- http://127.0.0.1:8000/api/auth/login/ - авторизация POST
+- http://158.160.9.119/api/auth/login/ - авторизация POST
 ```
 {
     "username": "user_user",
@@ -43,7 +47,7 @@
 }
 
 ```
-- http://127.0.0.1:8000/api/news/ - создание новости POST (при запросе GET - получение всех новостей)
+- http://158.160.9.119/api/news/ - создание новости POST (при запросе GET - получение всех новостей)
 ```
 {
     "date": "2023-06-29",
@@ -53,7 +57,7 @@
 }
 
 ```
-- http://127.0.0.1:8000/api/news/1/comments/ - создание коментария POST
+- http://158.160.9.119/api/news/1/comments/ - создание коментария POST
 ```
 {
     "date": "2023-06-29",
@@ -61,9 +65,9 @@
 }
 
 ```
-- http://127.0.0.1:8000/api/news/2/like/ - создание лайка POST (при повторной отправки POST запроса удаляет лайк)
+- http://158.160.9.119/api/news/2/like/ - создание лайка POST (при повторной отправки POST запроса удаляет лайк)
 
-- http://127.0.0.1:8000/api/news/3/comments/5/ - удаление коментария DELETE (нельзя удалить чужой коментарий, если ты не админ)
+- http://158.160.9.119/api/news/1/comments/2/ - удаление коментария DELETE (нельзя удалить чужой коментарий, если ты не админ)
 ```
 {
     "detail": "You do not have permission to perform this action."
